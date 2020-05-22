@@ -1,6 +1,6 @@
-"""
-This is the util document mainly for storing the data structure created for region to endpoint mapping.
-"""
+# -*- coding: utf-8 -*-
+
+"""Utilities for webotron."""
 
 from collections import namedtuple
 
