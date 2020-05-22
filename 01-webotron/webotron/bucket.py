@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """Classes for S3 Buckets."""
+import boto3
 from pathlib import Path
 import mimetypes
 from botocore.exceptions import ClientError
 import util
 from hashlib import md5
 from functools import reduce
-import boto3
+
 
 class BucketManager:
     """Manage an S3 bucket."""
@@ -24,6 +25,9 @@ class BucketManager:
         )
         self.manifest = {}
 
+    def get_bucket(self, bucket_name):
+        """Get a bucket by name."""
+        return self.s3.Bucket(bucket_name)
 
     def get_region_name(self, bucket):
         """Get the bucket's region name."""
@@ -34,9 +38,9 @@ class BucketManager:
     def get_bucket_url(self, bucket):
         """Get the website URL for this bucket."""
         return "http://{}.{}".format(
-                    bucket.name,
-                    util.get_endpoint(self.get_region_name(bucket)).host
-                    )
+            bucket.name,
+            util.get_endpoint(self.get_region_name(bucket)).host
+            )
 
     def all_buckets(self):
         """Get an iterator for all buckets."""
